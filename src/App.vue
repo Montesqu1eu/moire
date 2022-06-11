@@ -1,7 +1,9 @@
 <template>
-  <HeaderRegion />
-  <router-view />
-  <FooterRegion />
+  <div class="body-wrapper">
+    <HeaderRegion />
+    <router-view />
+    <FooterRegion />
+  </div>
 </template>
 
 <style lang="scss">

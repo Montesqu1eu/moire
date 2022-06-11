@@ -9,21 +9,15 @@
     <div class="content__catalog">
       <ProductFilters />
       <section class="catalog">
-        <div>
-          <loader
-            v-if="productsLoading"
-            bg="#343a40"
-            color1="#ffffff"
-            color2="#000"
-            name="dots"
-            object="#e02d71"
-            objectbg="#999793"
-            opacity="80"
-            size="5"
-            speed="2"
-          ></loader>
-          <ProductList :products="products" />
+        <div v-if="productsLoading" class="preloader preloader-catalog">
+          <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
+        <ProductList v-else :products="products" />
         <BasePagination
           :count="countProducts"
           :page-num="1"

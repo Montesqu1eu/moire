@@ -1,15 +1,28 @@
 <template>
-  <main class="content container">
+  <div v-if="productLoading" class="preloader preloader-catalog">
+    <div class="lds-ellipsis">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <main v-else-if="!productData" class="content container">
+    Загрузка не удалась
+  </main>
+  <main v-else class="content container">
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
           <a class="breadcrumbs__link" href="index.html"> Каталог </a>
         </li>
         <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="#"> Носки </a>
+          <a class="breadcrumbs__link" href="#">
+            {{ productData.category.title }}
+          </a>
         </li>
         <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link"> Носки с принтом мороженое </a>
+          <a class="breadcrumbs__link"> {{ productData.title }} </a>
         </li>
       </ul>
     </div>
@@ -18,42 +31,37 @@
       <div class="item__pics pics">
         <div class="pics__wrapper">
           <img
+            :src="selectedColor.gallery[0].file.url"
             alt="Название товара"
             height="570"
-            src="img/product-square-1.jpg"
-            srcset="img/product-square-1@2x.jpg 2x"
             width="570"
           />
         </div>
         <ul class="pics__list">
-          <li class="pics__item">
-            <a class="pics__link pics__link--current" href="">
+          <li
+            v-for="(item, index) in productData.colors"
+            :key="index"
+            class="pics__item"
+          >
+            <a
+              :data-id="item.id"
+              :class="{ 'pics__link--current': item.id == selectedColor.id }"
+              class="pics__link"
+              @click.prevent="selectedColor = item"
+            >
               <img
+                :src="item.gallery[0].file.url"
                 alt="Название товара"
                 height="98"
-                src="img/product-square-2.jpg"
-                srcset="img/product-square-2@2x.jpg 2x"
-                width="98"
-              />
-            </a>
-          </li>
-          <li class="pics__item">
-            <a class="pics__link" href="">
-              <img
-                alt="Название товара"
-                height="98"
-                src="img/product-square-3.jpg"
-                srcset="img/product-square-3@2x.jpg 2x"
                 width="98"
               />
             </a>
           </li>
         </ul>
       </div>
-
       <div class="item__info">
-        <span class="item__code">Артикул: 150030</span>
-        <h2 class="item__title">Смартфон Xiaomi Mi Mix 3 6/128GB</h2>
+        <span class="item__code">Артикул: {{ productData.id }}</span>
+        <h2 class="item__title">{{ productData.title }}</h2>
         <div class="item__form">
           <form action="#" class="form" method="POST">
             <div class="item__row item__row--center">
@@ -73,57 +81,35 @@
                 </button>
               </div>
 
-              <b class="item__price"> 18 990 ₽ </b>
+              <b class="item__price">
+                {{ formatNumber(productData.price) }} ₽
+              </b>
             </div>
 
             <div class="item__row">
-              <fieldset class="form__block">
+              <fieldset v-if="productColors" class="form__block">
                 <legend class="form__legend">Цвет</legend>
                 <ul class="colors colors--black">
-                  <li class="colors__item">
+                  <li
+                    v-for="(item, index) in productColors"
+                    :key="index"
+                    class="colors__item"
+                  >
                     <label class="colors__label">
                       <input
-                        checked=""
+                        v-model="selectedColor"
+                        :checked="index === 0"
+                        :name="item.id"
+                        :value="item"
                         class="colors__radio sr-only"
-                        name="color-item"
                         type="radio"
-                        value="blue"
                       />
                       <span
+                        :style="{ 'background-color': item.color.code }"
                         class="colors__value"
-                        style="background-color: #73b6ea"
                       >
                       </span>
                     </label>
-                  </li>
-                  <li class="colors__item">
-                    <label class="colors__label">
-                      <input
-                        class="colors__radio sr-only"
-                        name="color-item"
-                        type="radio"
-                        value="yellow"
-                      />
-                      <span
-                        class="colors__value"
-                        style="background-color: #ffbe15"
-                      >
-                      </span>
-                    </label>
-                  </li>
-                  <li class="colors__item">
-                    <label class="colors__label">
-                      <input
-                        class="colors__radio sr-only"
-                        name="color-item"
-                        type="radio"
-                        value="gray" />
-                      <span
-                        class="colors__value"
-                        style="background-color: #939393"
-                      >
-                      </span
-                    ></label>
                   </li>
                 </ul>
               </fieldset>
@@ -185,9 +171,11 @@
 <script>
 import axios from "axios";
 import { API_BASE_URL } from "@/config";
+import formatNumber from "@/mixins/formatNumber";
 
 export default {
   name: "ProductPage",
+  mixins: [formatNumber],
   data() {
     return {
       productAmount: 1,
@@ -198,6 +186,9 @@ export default {
 
       productAdded: false,
       productAddSending: false,
+
+      productColors: null,
+      selectedColor: null,
     };
   },
   methods: {
@@ -206,7 +197,11 @@ export default {
       this.productLoadingFailed = false;
       axios
         .get(API_BASE_URL + "/api/products/" + this.$route.params.id)
-        .then((response) => (this.productData = response.data))
+        .then((response) => {
+          this.productData = response.data;
+          this.productColors = this.productData.colors;
+          this.selectedColor = this.productColors[0];
+        })
         .catch((error) => {
           if (error.response.status === 404) {
             this.$router.push({ name: "notfound" });
