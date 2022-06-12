@@ -251,6 +251,10 @@
   color: #222
 }
 
+.form__label--select {
+  cursor: pointer;
+}
+
 .form__label--select::after {
   content: '';
   position: absolute;
@@ -358,7 +362,7 @@
   transition: all .2s ease
 }
 
-.form__counter button:focus, .form__counter button:hover {
+.form__counter button:hover {
   background-color: #222;
   color: #fff
 }
