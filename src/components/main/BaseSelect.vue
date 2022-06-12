@@ -6,7 +6,6 @@
         v-model="selected"
         class="form__select"
         name="category"
-        type="text"
         @change="onSelect"
       >
         <option

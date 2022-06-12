@@ -5,12 +5,10 @@
     </div>
     <ul class="pics__list">
       <li v-for="(item, index) in imgList" :key="index" class="pics__item">
-        <!--        :class="{-->
-        <!--        'pics__link&#45;&#45;current': item.id == productInfo.colorObj.id,-->
-        <!--        }"-->
-        <!--        @click.prevent="productInfo.color = item"-->
         <a
-          :data-id="item.id"
+          :class="{
+            'pics__link--current': item.gallery[0].file.url == mainImg,
+          }"
           class="pics__link"
           @click.prevent="changeImg($event)"
         >
@@ -30,10 +28,6 @@
 export default {
   name: "BaseGallery",
   props: {
-    mainImg: {
-      type: String,
-      default: require("@/assets/img/error.png"),
-    },
     imgPicker: {
       type: Boolean,
       default: false,
@@ -43,9 +37,17 @@ export default {
       default: () => [],
     },
   },
+  data() {
+    return {
+      mainImg:
+        this.imgList[0].gallery[0].file.url ??
+        require("@/assets/img/error.png"),
+      pickedItem: null,
+    };
+  },
   methods: {
     changeImg(event) {
-      console.log(event.target.src);
+      this.mainImg = event.target.src ?? require("@/assets/img/error.png");
     },
   },
 };

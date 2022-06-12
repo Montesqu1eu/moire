@@ -28,11 +28,10 @@
     </div>
 
     <section class="item">
-      <!--     here-->
       <BaseGallery
         :img-list="productData.colors"
-        :main-img="productData.colors[0].gallery[0].file.url"
         img-picker
+        @color="pickedImg"
       />
       <div class="item__info">
         <span class="item__code">Артикул: {{ productData.id }}</span>
@@ -40,7 +39,6 @@
         <div class="item__form">
           <form action="#" class="form" method="POST">
             <div class="item__row item__row--center">
-              <!--here-->
               <BaseCounter @update="updateQuantity" />
               <b class="item__price">
                 {{ formatNumber(productData.price) }} ₽
@@ -48,11 +46,11 @@
             </div>
 
             <div class="item__row">
-              <fieldset v-if="productColors" class="form__block">
+              <fieldset class="form__block">
                 <legend class="form__legend">Цвет</legend>
                 <ul class="colors colors--black">
                   <li
-                    v-for="(item, index) in productColors"
+                    v-for="(item, index) in productData.colors"
                     :key="index"
                     class="colors__item"
                   >
@@ -135,7 +133,6 @@ export default {
   },
   data() {
     return {
-      // productAmount: 1,
       productData: null,
 
       productLoading: false,
@@ -144,7 +141,6 @@ export default {
       productAdded: false,
       productAddSending: false,
 
-      productColors: null,
       productInfo: {},
     };
   },
@@ -156,13 +152,12 @@ export default {
         .get(API_BASE_URL + "/api/products/" + this.$route.params.id)
         .then((response) => {
           this.productData = response.data;
-          this.productColors = this.productData.colors;
 
           this.productInfo = {
             productId: this.productData.id,
             sizeId: this.productData.sizes[0].id,
             quantity: 1,
-            colorId: this.productColors[0].color.id,
+            colorId: this.productData.colors[0].color.id,
           };
         })
         .catch((error) => {
@@ -179,6 +174,9 @@ export default {
     },
     updateQuantity(quantity) {
       this.productInfo.quantity = quantity;
+    },
+    pickedImg(id) {
+      this.productInfo.colorId = id;
     },
   },
   watch: {
