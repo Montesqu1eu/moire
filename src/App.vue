@@ -12,8 +12,20 @@
 <script>
 import HeaderRegion from "@/components/HeaderRegion";
 import FooterRegion from "@/components/FooterRegion";
+import { mapActions, mapMutations } from "vuex";
 
 export default {
   components: { FooterRegion, HeaderRegion },
+  methods: {
+    ...mapActions(["loadCart"]),
+    ...mapMutations(["updateUserAccessKey"]),
+  },
+  created() {
+    const userAccessKey = localStorage.getItem("userAccessKey");
+    if (userAccessKey) {
+      this.updateUserAccessKey(userAccessKey);
+    }
+    this.loadCart();
+  },
 };
 </script>

@@ -14,7 +14,13 @@ const routes = [
       import(/* webpackChunkName: "about" */ "@/views/ProductPage.vue"),
   },
   {
-    path: "/error",
+    path: "/cart",
+    name: "cart",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "@/views/CartPage.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)*",
     name: "error",
     component: () =>
       import(/* webpackChunkName: "about" */ "@/views/ErrorPage.vue"),

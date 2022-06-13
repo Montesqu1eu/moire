@@ -119,6 +119,8 @@
 import axios from "axios";
 import { API_BASE_URL } from "@/config";
 import formatNumber from "@/mixins/formatNumber";
+import { mapActions } from "vuex";
+
 import BaseSelect from "@/components/main/BaseSelect";
 import BaseCounter from "@/components/main/BaseCounter";
 import BaseGallery from "@/components/main/BaseGallery";
@@ -177,6 +179,31 @@ export default {
     },
     pickedImg(id) {
       this.productInfo.colorId = id;
+    },
+    ...mapActions(["addProductToCart"]),
+    addToCart() {
+      this.productAdded = false;
+      this.productAddSending = true;
+      const exist = this.$store.state.cartProductsData.find(
+        (item) => item.product.id === this.product.id
+      );
+      if (!exist) {
+        this.addProductToCart({
+          productId: this.product.id,
+          amount: this.productAmount,
+        }).then(() => {
+          this.productAdded = true;
+          this.productAddSending = false;
+        });
+      } else {
+        this.updateCartProductAmount({
+          productId: this.product.id,
+          amount: this.productAmount,
+        }).then(() => {
+          this.productAdded = true;
+          this.productAddSending = false;
+        });
+      }
     },
   },
   watch: {
