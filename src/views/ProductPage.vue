@@ -37,7 +37,12 @@
         <span class="item__code">Артикул: {{ productData.id }}</span>
         <h2 class="item__title">{{ productData.title }}</h2>
         <div class="item__form">
-          <form action="#" class="form" method="POST">
+          <form
+            action="#"
+            class="form"
+            method="POST"
+            @submit.prevent="addToCart"
+          >
             <div class="item__row item__row--center">
               <BaseCounter @update="updateQuantity" />
               <b class="item__price">
@@ -147,6 +152,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["addProductToCart", "updateCartProductAmountAction"]),
     loadProduct() {
       this.productLoading = true;
       this.productLoadingFailed = false;
@@ -180,25 +186,29 @@ export default {
     pickedImg(id) {
       this.productInfo.colorId = id;
     },
-    ...mapActions(["addProductToCart"]),
+    ...mapActions(["addProductToCart", "updateCartProductAmountAction"]),
     addToCart() {
       this.productAdded = false;
       this.productAddSending = true;
       const exist = this.$store.state.cartProductsData.find(
-        (item) => item.product.id === this.product.id
+        (item) => item.product.id === this.productInfo.productId
       );
       if (!exist) {
         this.addProductToCart({
-          productId: this.product.id,
-          amount: this.productAmount,
+          productId: this.productInfo.productId,
+          colorId: this.productInfo.colorId,
+          sizeId: this.productInfo.sizeId,
+          quantity: this.productInfo.quantity,
         }).then(() => {
           this.productAdded = true;
           this.productAddSending = false;
         });
       } else {
-        this.updateCartProductAmount({
-          productId: this.product.id,
-          amount: this.productAmount,
+        this.updateCartProductAmountAction({
+          productId: this.productInfo.productId,
+          colorId: this.productInfo.colorId,
+          sizeId: this.productInfo.sizeId,
+          quantity: this.productInfo.quantity,
         }).then(() => {
           this.productAdded = true;
           this.productAddSending = false;

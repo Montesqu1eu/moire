@@ -19,7 +19,7 @@
     </div>
 
     <section class="cart">
-      <form action="#" class="cart__form form" method="POST">
+      <form action="#" class="cart__form form" method="POST" @click.prevent>
         <div class="cart__field">
           <ul class="cart__list">
             <CartItem

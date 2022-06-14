@@ -78,7 +78,7 @@ export default {
     changeQuantity(quantity) {
       this.quantity = quantity;
       this.updateCartProductAmount({
-        productId: this.item.product.id,
+        productId: this.item.productId,
         quantity: this.quantity,
       });
       this.$store.dispatch("updateCartProductAmountAction", {

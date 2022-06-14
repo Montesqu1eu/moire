@@ -18,13 +18,18 @@ export async function loadCart(context) {
     });
 }
 
-export async function addProductToCart(context, { productId, amount }) {
+export async function addProductToCart(
+  context,
+  { productId, colorId, sizeId, quantity }
+) {
   return await axios
-    .put(
+    .post(
       API_BASE_URL + "/api/baskets/products",
       {
         productId: productId,
-        quantity: amount,
+        colorId: colorId,
+        sizeId: sizeId,
+        quantity: quantity,
       },
       {
         params: {
