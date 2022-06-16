@@ -43,40 +43,6 @@ export async function addProductToCart(
     });
 }
 
-export async function updateCartProductAmount(
-  context,
-  { basketItemId, quantity }
-) {
-  context.commit("updateCartProductAmount", {
-    //updateCartProductAmount из мутаций
-    basketItemId,
-    quantity,
-  });
-
-  if (quantity < 1) return;
-
-  return await axios
-    .put(
-      API_BASE_URL + "/api/baskets/products",
-      {
-        basketItemId: basketItemId,
-        quantity: quantity,
-      },
-      {
-        params: {
-          userAccessKey: context.state.userAccessKey,
-        },
-      }
-    )
-    .then((response) => {
-      context.commit("updateCartProductsData", response.data.items);
-    })
-    .catch(() => {
-      // context.commit("syncCartProducts");
-      console.log("sync");
-    });
-}
-
 export async function updateCartProductAmountAction(
   context,
   { basketItemId, quantity }

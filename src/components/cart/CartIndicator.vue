@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{ name: 'cart' }"
+    :to="{ name: 'cart', params: {} }"
     aria-label="Корзина с товарами"
     class="header__cart"
   >

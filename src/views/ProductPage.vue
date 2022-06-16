@@ -37,12 +37,7 @@
         <span class="item__code">Артикул: {{ productData.id }}</span>
         <h2 class="item__title">{{ productData.title }}</h2>
         <div class="item__form">
-          <form
-            action="#"
-            class="form"
-            method="POST"
-            @submit.prevent="addToCart"
-          >
+          <form class="form" @submit.prevent="addToCart">
             <div class="item__row item__row--center">
               <BaseCounter @update="updateQuantity" />
               <b class="item__price">
@@ -164,13 +159,15 @@ export default {
           this.productInfo = {
             productId: this.productData.id,
             sizeId: this.productData.sizes[0].id,
+            sizeName: this.productData.sizes,
             quantity: 1,
             colorId: this.productData.colors[0].color.id,
+            sizes: this.productData.sizes,
           };
         })
         .catch((error) => {
           if (error.response.status === 404) {
-            this.$router.push({ name: "notfound" });
+            this.$router.push({ name: "error", params: {} });
           } else {
             this.productLoadingFailed = true;
           }
@@ -190,35 +187,35 @@ export default {
     addToCart() {
       this.productAdded = false;
       this.productAddSending = true;
-      const exist = this.$store.state.cartProductsData.find(
-        (item) => item.product.id === this.productInfo.productId
-      );
-      if (!exist) {
-        this.addProductToCart({
-          productId: this.productInfo.productId,
-          colorId: this.productInfo.colorId,
-          sizeId: this.productInfo.sizeId,
-          quantity: this.productInfo.quantity,
-        }).then(() => {
+
+      this.addProductToCart({
+        productId: this.productInfo.productId,
+        colorId: this.productInfo.colorId,
+        sizeId: this.productInfo.sizeId,
+        quantity: this.productInfo.quantity,
+      })
+        .then(() => {
           this.productAdded = true;
           this.productAddSending = false;
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      } else {
-        this.updateCartProductAmountAction({
-          productId: this.productInfo.productId,
-          colorId: this.productInfo.colorId,
-          sizeId: this.productInfo.sizeId,
-          quantity: this.productInfo.quantity,
-        }).then(() => {
-          this.productAdded = true;
-          this.productAddSending = false;
-        });
-      }
+      // } else {
+      //   this.updateCartProductAmountAction({
+      //     basketItemId: this.productInfo.productId,
+      //     quantity: this.productInfo.quantity,
+      //   }).then(() => {
+      //     this.productAdded = true;
+      //     this.productAddSending = false;
+      //   });
+      // }
     },
   },
   watch: {
     "$route.params.id": {
       handler() {
+        if (!this.$route.params.id) return;
         this.loadProduct();
       },
       immediate: true,

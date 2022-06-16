@@ -818,7 +818,12 @@
   grid-row: 1/2;
   font-size: 16px;
   line-height: 22px;
-  font-weight: 400
+  font-weight: 400;
+}
+a {
+  .product__title {
+    color: black;
+  }
 }
 
 .product__info {
@@ -849,7 +854,8 @@
 
 .product__info--color span i {
   left: 5px;
-  display: block
+  display: block;
+  border: 1px solid lightgray;
 }
 
 .product__info span {

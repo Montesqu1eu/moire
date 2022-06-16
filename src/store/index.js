@@ -14,8 +14,12 @@ export default createStore({
         const product = state.cartProductsData.find(
           (p) => p.product.id === item.productId
         ).product;
+        const size = state.cartProductsData.find(
+          (p) => p.size.id === item.sizeId
+        );
         return {
           ...item,
+          size: size.size,
           product: {
             ...product,
             colors: product.colors.find(

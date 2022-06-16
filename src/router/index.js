@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
   {
@@ -8,16 +8,16 @@ const routes = [
       import(/* webpackChunkName: "about" */ "@/views/MainPage.vue"),
   },
   {
-    path: "/product/:id",
-    name: "product",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "@/views/ProductPage.vue"),
-  },
-  {
     path: "/cart",
     name: "cart",
     component: () =>
       import(/* webpackChunkName: "about" */ "@/views/CartPage.vue"),
+  },
+  {
+    path: "/product/:id",
+    name: "product",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "@/views/ProductPage.vue"),
   },
   {
     path: "/:pathMatch(.*)*",
@@ -28,7 +28,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes,
 });
 

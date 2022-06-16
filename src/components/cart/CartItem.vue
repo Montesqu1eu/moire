@@ -8,13 +8,16 @@
         width="120"
       />
     </div>
-    <h3 class="product__title">{{ item.product.title }}</h3>
+    <router-link :to="{ name: 'product', params: { id: item.product.id } }"
+      ><h3 class="product__title">{{ item.product.title }}</h3></router-link
+    >
     <p class="product__info product__info--color">
       Цвет:
       <span>
         <i :style="{ 'background-color': item.product.colors.color.code }"></i>
         {{ item.product.colors.color.title }}
       </span>
+      <span style="color: #222222">Размер: {{ item.size.title }}</span>
     </p>
     <span class="product__code"> Артикул: {{ item.product.id }} </span>
 
