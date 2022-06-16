@@ -4,15 +4,20 @@
       <fieldset class="form__block">
         <legend class="form__legend">Цена</legend>
         <label class="form__label form__label--price">
-          <input class="form__input" name="min-price" type="text" value="0" />
+          <input
+            v-model.number="currentFilters.priceFrom"
+            class="form__input"
+            name="min-price"
+            type="text"
+          />
           <span class="form__value">От</span>
         </label>
         <label class="form__label form__label--price">
           <input
+            v-model.number="currentFilters.priceTo"
             class="form__input"
             name="max-price"
             type="text"
-            value="12345"
           />
           <span class="form__value">До</span>
         </label>
@@ -21,11 +26,19 @@
       <fieldset class="form__block">
         <legend class="form__legend">Категория</legend>
         <label class="form__label form__label--select">
-          <select class="form__select" name="category" type="text">
-            <option value="value1">Все категории</option>
-            <option value="value2">Футболки</option>
-            <option value="value3">Бюстгалтеры</option>
-            <option value="value4">Носки</option>
+          <select
+            v-model.number="currentFilters.categoryId"
+            class="form__select"
+            name="category"
+          >
+            <option value="0">Все категории</option>
+            <option
+              v-for="category in categoriesData"
+              :key="category.id"
+              :value="category.id"
+            >
+              {{ category.title }}
+            </option>
           </select>
         </label>
       </fieldset>
@@ -33,59 +46,22 @@
       <fieldset class="form__block">
         <legend class="form__legend">Материал</legend>
         <ul class="check-list">
-          <li class="check-list__item">
+          <li
+            v-for="(material, index) in materialsData"
+            :key="index"
+            class="check-list__item"
+          >
             <label class="check-list__label">
               <input
+                v-model.number="currentFilters.materialIds"
+                :value="material.id"
                 class="check-list__check sr-only"
                 name="material"
                 type="checkbox"
-                value="лен"
               />
               <span class="check-list__desc">
-                лен
-                <span>(3)</span>
-              </span>
-            </label>
-          </li>
-          <li class="check-list__item">
-            <label class="check-list__label">
-              <input
-                class="check-list__check sr-only"
-                name="material"
-                type="checkbox"
-                value="хлопок"
-              />
-              <span class="check-list__desc">
-                хлопок
-                <span>(46)</span>
-              </span>
-            </label>
-          </li>
-          <li class="check-list__item">
-            <label class="check-list__label">
-              <input
-                class="check-list__check sr-only"
-                name="material"
-                type="checkbox"
-                value="шерсть"
-              />
-              <span class="check-list__desc">
-                шерсть
-                <span>(20)</span>
-              </span>
-            </label>
-          </li>
-          <li class="check-list__item">
-            <label class="check-list__label">
-              <input
-                class="check-list__check sr-only"
-                name="material"
-                type="checkbox"
-                value="шелк"
-              />
-              <span class="check-list__desc">
-                шелк
-                <span>(30)</span>
+                {{ material.title }}
+                <span>({{ material.productsCount }})</span>
               </span>
             </label>
           </li>
@@ -95,70 +71,38 @@
       <fieldset class="form__block">
         <legend class="form__legend">Коллекция</legend>
         <ul class="check-list">
-          <li class="check-list__item">
+          <li
+            v-for="(season, index) in seasonsData"
+            :key="index"
+            class="check-list__item"
+          >
             <label class="check-list__label">
               <input
-                checked=""
+                v-model.number="currentFilters.seasonIds"
+                :value="season.id"
                 class="check-list__check sr-only"
-                name="collection"
+                name="season"
                 type="checkbox"
-                value="лето"
               />
               <span class="check-list__desc">
-                лето
-                <span>(2)</span>
-              </span>
-            </label>
-          </li>
-          <li class="check-list__item">
-            <label class="check-list__label">
-              <input
-                class="check-list__check sr-only"
-                name="collection"
-                type="checkbox"
-                value="зима"
-              />
-              <span class="check-list__desc">
-                зима
-                <span>(53)</span>
-              </span>
-            </label>
-          </li>
-          <li class="check-list__item">
-            <label class="check-list__label">
-              <input
-                class="check-list__check sr-only"
-                name="collection"
-                type="checkbox"
-                value="весна"
-              />
-              <span class="check-list__desc">
-                весна
-                <span>(24)</span>
-              </span>
-            </label>
-          </li>
-          <li class="check-list__item">
-            <label class="check-list__label">
-              <input
-                class="check-list__check sr-only"
-                name="collection"
-                type="checkbox"
-                value="осень"
-              />
-              <span class="check-list__desc">
-                осень
-                <span>(30)</span>
+                {{ season.title }}
+                <span>({{ season.productsCount }})</span>
               </span>
             </label>
           </li>
         </ul>
       </fieldset>
 
-      <button class="filter__submit button button--primery" type="submit">
+      <button
+        class="filter__submit button button--primery"
+        @click.prevent="submit"
+      >
         Применить
       </button>
-      <button class="filter__reset button button--second" type="button">
+      <button
+        class="filter__reset button button--second"
+        @click.prevent="reset"
+      >
         Сбросить
       </button>
     </form>
@@ -166,9 +110,70 @@
 </template>
 
 <script>
+import axios from "axios";
+import { API_BASE_URL } from "@/config";
+
 export default {
   name: "ProductFilters",
-  props: {},
+  data() {
+    return {
+      filters: {
+        materialsData: "/api/materials/",
+        colorsData: "/api/colors/",
+        seasonsData: "/api/seasons/",
+        categoriesData: "/api/productCategories/",
+      },
+      materialsData: [],
+      colorsData: [],
+      seasonsData: [],
+      categoriesData: [],
+
+      currentFilters: {
+        priceFrom: 0,
+        priceTo: 0,
+        categoryId: 0,
+        materialIds: [],
+        seasonIds: [],
+      },
+    };
+  },
+  methods: {
+    submit() {
+      this.$emit("priceFrom", this.currentFilters.priceFrom);
+      this.$emit("priceTo", this.currentFilters.priceTo);
+      this.$emit("categoryId", this.currentFilters.categoryId);
+      this.$emit("materialIds", this.currentFilters.materialIds);
+      this.$emit("seasonIds", this.currentFilters.seasonIds);
+    },
+    reset() {
+      this.$emit("priceFrom", 0);
+      this.$emit("priceTo", 0);
+      this.$emit("categoryId", 0);
+      this.$emit("materialIds", null);
+      this.$emit("seasonIds", null);
+      this.currentFilters = {
+        priceFrom: 0,
+        priceTo: 0,
+        categoryId: 0,
+        materialIds: [],
+        seasonIds: [],
+      };
+    },
+    async loadFilters(filter, url) {
+      try {
+        const response = await axios.get(API_BASE_URL + url);
+        if (!response.data?.items) return;
+        this[filter] = response.data.items;
+      } catch (e) {
+        this[filter] = [];
+      }
+    },
+  },
+  async created() {
+    for (let filter in this.filters) {
+      await this.loadFilters(filter, this.filters[filter]);
+    }
+  },
 };
 </script>
 
