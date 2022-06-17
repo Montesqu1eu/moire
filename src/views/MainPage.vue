@@ -13,6 +13,8 @@
         @seasonIds="seasonIds"
         @priceFrom="minPrice"
         @priceTo="maxPrice"
+        @colorIds="colorIds"
+        @limit="limit"
       />
       <section class="catalog">
         <div v-if="productsLoading" class="preloader preloader-catalog">
@@ -30,7 +32,7 @@
         <BasePagination
           :count="countProducts"
           :page-num="1"
-          :per-page="productsPerPage"
+          :per-page="filter.limit"
           @paginate="changePage"
         />
       </section>
@@ -52,19 +54,17 @@ export default {
   mixins: [filtersChanges],
   data() {
     return {
-      // filterPriceFrom: 0,
-      // filterPriceTo: 0,
-      // filterCategoryId: 0,
-      // filterColorId: 0,
       filter: {
         minPrice: 0,
         maxPrice: 0,
         categoryId: 0,
         materialIds: null,
         seasonIds: null,
+        colorIds: null,
+        limit: 12,
       },
       page: 1,
-      productsPerPage: 3,
+      // productsPerPage: 3,
 
       productsData: null,
 
@@ -91,12 +91,13 @@ export default {
           .get(API_BASE_URL + "/api/products", {
             params: {
               page: this.page,
-              limit: this.productsPerPage,
+              limit: this.filter.limit,
               categoryId: this.filter.categoryId,
               minPrice: this.filter.minPrice,
               maxPrice: this.filter.maxPrice,
               materialIds: this.filter.materialIds,
               seasonIds: this.filter.seasonIds,
+              colorIds: this.filter.colorIds,
             },
           })
           .then((response) => (this.productsData = response.data))

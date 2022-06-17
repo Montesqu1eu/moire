@@ -24,6 +24,34 @@
       </fieldset>
 
       <fieldset class="form__block">
+        <legend class="form__legend">Цвет</legend>
+        <ul class="colors colors--black">
+          <li
+            v-for="(color, index) in colorsData"
+            :key="index"
+            class="colors__item"
+          >
+            <label class="colors__label">
+              <input
+                v-model="currentFilters.colorIds"
+                :name="color.id"
+                :value="color.id"
+                class="colors__radio sr-only"
+                type="checkbox"
+              />
+              <span
+                :style="{
+                  'background-color': color.code,
+                }"
+                class="colors__value"
+              >
+              </span>
+            </label>
+          </li>
+        </ul>
+      </fieldset>
+
+      <fieldset class="form__block">
         <legend class="form__legend">Категория</legend>
         <label class="form__label form__label--select">
           <select
@@ -93,6 +121,29 @@
         </ul>
       </fieldset>
 
+      <fieldset class="form__block">
+        <legend class="form__legend">Кол-во товаров</legend>
+        <ul class="check-list">
+          <li
+            v-for="(item, index) in productLimit"
+            :key="index"
+            class="check-list__item"
+          >
+            <label class="check-list__label">
+              <input
+                v-model="currentFilters.limit"
+                :checked="index === 0"
+                :name="item"
+                :value="item"
+                class="check-list__check sr-only"
+                type="radio"
+              />
+              <span class="check-list__desc"> {{ item }} </span>
+            </label>
+          </li>
+        </ul>
+      </fieldset>
+
       <button
         class="filter__submit button button--primery"
         @click.prevent="submit"
@@ -113,6 +164,8 @@
 import axios from "axios";
 import { API_BASE_URL } from "@/config";
 
+// const productLimit = [12, 24, 32];
+
 export default {
   name: "ProductFilters",
   data() {
@@ -123,6 +176,7 @@ export default {
         seasonsData: "/api/seasons/",
         categoriesData: "/api/productCategories/",
       },
+      productLimit: [12, 24, 32],
       materialsData: [],
       colorsData: [],
       seasonsData: [],
@@ -134,6 +188,8 @@ export default {
         categoryId: 0,
         materialIds: [],
         seasonIds: [],
+        colorIds: [],
+        limit: 12,
       },
     };
   },
@@ -144,6 +200,8 @@ export default {
       this.$emit("categoryId", this.currentFilters.categoryId);
       this.$emit("materialIds", this.currentFilters.materialIds);
       this.$emit("seasonIds", this.currentFilters.seasonIds);
+      this.$emit("colorIds", this.currentFilters.colorIds);
+      this.$emit("limit", this.currentFilters.limit);
     },
     reset() {
       this.$emit("priceFrom", 0);
@@ -151,12 +209,16 @@ export default {
       this.$emit("categoryId", 0);
       this.$emit("materialIds", null);
       this.$emit("seasonIds", null);
+      this.$emit("colorIds", null);
+      this.$emit("limit", 12);
       this.currentFilters = {
         priceFrom: 0,
         priceTo: 0,
         categoryId: 0,
         materialIds: [],
         seasonIds: [],
+        colorIds: [],
+        limit: 12,
       };
     },
     async loadFilters(filter, url) {

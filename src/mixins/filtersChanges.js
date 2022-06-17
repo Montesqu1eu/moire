@@ -15,6 +15,12 @@ export default {
     seasonIds(value) {
       this.filter.seasonIds = value;
     },
+    colorIds(value) {
+      this.filter.colorIds = value;
+    },
+    limit(value) {
+      this.filter.limit = value;
+    },
   },
   watch: {
     filter: {
