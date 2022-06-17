@@ -3,23 +3,23 @@
     <div class="footer__wrapper">
       <ul class="footer__links">
         <li>
-          <a class="footer__link" href="#"> Каталог </a>
+          <router-link :to="{ name: 'main' }" class="footer__link">
+            Каталог
+          </router-link>
         </li>
         <li>
           <a class="footer__link" href="tel:88006009009"> 8 800 600 90 09 </a>
         </li>
         <li>
-          <a class="footer__link" href="mailto:hi@technozavrrr.com">
-            hi@technozavrrr.com
-          </a>
+          <a class="footer__link" href="mailto:hi@moire.com"> hi@moire.com </a>
         </li>
         <li>
-          <a class="footer__link" href="#"> Распродажа </a>
+          <span class="footer__link"> Распродажа </span>
         </li>
         <li>
-          <a class="footer__link footer__link--medium" href="#">
+          <span class="footer__link footer__link--medium">
             Заказать звонок
-          </a>
+          </span>
         </li>
       </ul>
 

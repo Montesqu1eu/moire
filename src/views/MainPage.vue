@@ -3,18 +3,20 @@
     <div class="content__top">
       <div class="content__row">
         <h1 class="content__title">Каталог</h1>
-        <span class="content__info"> 152 товара </span>
+        <span v-if="!productsLoading" class="content__info">
+          {{ products.length }} товаров</span
+        >
       </div>
     </div>
     <div class="content__catalog">
       <ProductFilters
         @categoryId="categoryId"
-        @materialIds="materialIds"
-        @seasonIds="seasonIds"
-        @priceFrom="minPrice"
-        @priceTo="maxPrice"
         @colorIds="colorIds"
         @limit="limit"
+        @materialIds="materialIds"
+        @priceFrom="minPrice"
+        @priceTo="maxPrice"
+        @seasonIds="seasonIds"
       />
       <section class="catalog">
         <div v-if="productsLoading" class="preloader preloader-catalog">

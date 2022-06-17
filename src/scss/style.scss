@@ -431,7 +431,7 @@
   --border-color: #222
 }
 
-.colors__item:not(:last-child) {
+.colors__item {
   margin-right: 4px;
   margin-bottom: 4px;
 }
@@ -696,6 +696,7 @@
 
 .cart__button {
   margin-top: 20px;
+  text-align: center;
   width: 100%
 }
 
@@ -1102,22 +1103,23 @@ a {
   list-style: none;
   display: grid;
   grid-template-columns:repeat(3, 1fr);
-  grid-gap: 65px 30px;
+  grid-gap: 65px 65px;
   margin: 0 0 70px
 }
 
 .catalog__pic {
   display: flex;
   align-items: center;
-  width: 270px;
-  height: 350px;
+  justify-content: center;
+  //width: 270px;
+  //height: 350px;
   margin-bottom: 20px
 }
 
 .catalog__pic img {
-  max-width: 270px;
+  max-width: 200px;
   width: 100%;
-  max-height: 350px;
+  max-height: 260px;
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover
@@ -1141,11 +1143,13 @@ a {
 }
 
 .catalog__title {
+  display: inline-block;
   margin: 0 0 10px;
   font-weight: 400;
   font-size: 16px;
   line-height: 22px;
-  color: #222
+  color: #222;
+  height: 44px;
 }
 
 .catalog__title a {
