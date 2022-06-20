@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import store from "@/store";
 
 const routes = [
   {
@@ -32,16 +33,35 @@ const routes = [
       import(/* webpackChunkName: "about" */ "@/views/ProductPage.vue"),
   },
   {
-    path: "/:pathMatch(.*)*",
+    path: "/error",
     name: "error",
     component: () =>
       import(/* webpackChunkName: "about" */ "@/views/ErrorPage.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "error",
   },
 ];
 
 const router = createRouter({
   history: createWebHashHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.name === "error") next();
+  else if (to.name !== "orderInfo") next();
+  else if (store.state.orderInfo && store.state.orderInfo.id === to.params.id)
+    next();
+  else {
+    store
+      .dispatch("loadOrderInfo", to.params.id)
+      .then(() => next())
+      .catch(() => {
+        next({ name: "error" });
+      });
+  }
 });
 
 export default router;

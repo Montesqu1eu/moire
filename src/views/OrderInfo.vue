@@ -17,7 +17,7 @@
         </li>
       </ul>
 
-      <h1 class="content__title">
+      <h1 v-if="order" class="content__title">
         Заказ оформлен <span>№ {{ order.id }}</span>
       </h1>
     </div>
@@ -106,17 +106,21 @@ export default {
       totalPrice: "cartTotalPrice",
     }),
   },
-  watch: {
-    "$route.params.id": {
-      handler() {
-        // if (this.$store.state.orderInfo && this.$store.state.orderInfo.id === this.$route.params.id) return;
-        this.$store
-          .dispatch("loadOrderInfo", this.$route.params.id)
-          .catch(() => this.$router.push({ name: "notfound" }));
-      },
-      immediate: true,
-    },
-  },
+  // watch: {
+  //   "$route.params.id": {
+  //     handler() {
+  //       console.log(this.$route.params.id + "id");
+  //       // if (this.$store.state.orderInfo && this.$store.state.orderInfo.id === this.$route.params.id) return;
+  //       this.$store
+  //         .dispatch("loadOrderInfo", this.$route.params.id)
+  //         .catch((error) => {
+  //           console.log(error.response.data.error.message);
+  //           this.$router.push({ name: "error" });
+  //         });
+  //     },
+  //     immediate: true,
+  //   },
+  // },
 };
 </script>
 

@@ -95,14 +95,18 @@ export async function deleteCartProductItem(context, productId) {
     });
 }
 
-export async function loadOrderInfo(context, orderId) {
-  return await axios
-    .get(API_BASE_URL + "/api/orders/" + orderId, {
-      params: {
-        userAccessKey: context.state.userAccessKey,
-      },
-    })
-    .then((response) => {
-      context.commit("updateOrderInfo", response.data);
-    });
+export function loadOrderInfo(context, orderId) {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(API_BASE_URL + "/api/orders/" + orderId, {
+        params: {
+          userAccessKey: context.state.userAccessKey,
+        },
+      })
+      .then((response) => {
+        resolve(response);
+        context.commit("updateOrderInfo", response.data);
+      })
+      .catch((error) => reject(error));
+  });
 }
