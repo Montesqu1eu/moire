@@ -94,3 +94,15 @@ export async function deleteCartProductItem(context, productId) {
       context.commit("updateCartProductsData", error.data.items);
     });
 }
+
+export async function loadOrderInfo(context, orderId) {
+  return await axios
+    .get(API_BASE_URL + "/api/orders/" + orderId, {
+      params: {
+        userAccessKey: context.state.userAccessKey,
+      },
+    })
+    .then((response) => {
+      context.commit("updateOrderInfo", response.data);
+    });
+}

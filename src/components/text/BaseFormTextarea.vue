@@ -3,6 +3,7 @@
     <textarea
       :value="modelValue"
       :placeholder="placeholder"
+      @input="updateValue"
       class="form__input form__input--area"
     ></textarea>
   </BaseFormField>

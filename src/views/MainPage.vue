@@ -65,8 +65,8 @@ export default {
         colorIds: null,
         limit: 12,
       },
+
       page: 1,
-      // productsPerPage: 3,
 
       productsData: null,
 

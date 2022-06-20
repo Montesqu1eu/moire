@@ -30,3 +30,12 @@ export function deleteCartProduct(state, productId) {
     (item) => item.productId !== productId
   );
 }
+
+export function resetCart(state) {
+  state.cartProducts = [];
+  state.cartProductsData = [];
+}
+
+export function updateOrderInfo(state, orderInfo) {
+  state.orderInfo = orderInfo;
+}

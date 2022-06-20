@@ -14,7 +14,7 @@
 
       <div class="content__row">
         <h1 class="content__title">Корзина</h1>
-        <span class="content__info"> 3 товара </span>
+        <span class="content__info"> {{ products.length }} товара </span>
       </div>
     </div>
 
