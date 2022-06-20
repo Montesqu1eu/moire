@@ -198,9 +198,7 @@ export default {
           this.productAdded = true;
           this.productAddSending = false;
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch(() => {});
       // } else {
       //   this.updateCartProductAmountAction({
       //     basketItemId: this.productInfo.productId,
