@@ -75,9 +75,22 @@
               <BaseSelect :data-list="productData.sizes" @select="getSize" />
             </div>
 
-            <button class="item__button button button--primery" type="submit">
+            <button
+              :disabled="productAddSending"
+              class="item__button button button--primery"
+              type="submit"
+            >
               В корзину
             </button>
+            <div v-show="productAdded" style="margin-top: 20px">
+              Товар добавлен в корзину
+            </div>
+            <div v-show="productAddSending" style="margin-top: 20px">
+              Добавляем товар в корзину...
+            </div>
+            <div v-show="productError" style="margin-top: 20px">
+              Ошибка добавления товара: {{ errorMessage }}
+            </div>
           </form>
         </div>
       </div>
@@ -142,6 +155,8 @@ export default {
 
       productAdded: false,
       productAddSending: false,
+      productError: false,
+      errorMessage: "",
 
       productInfo: {},
     };
@@ -197,19 +212,13 @@ export default {
         .then(() => {
           this.productAdded = true;
           this.productAddSending = false;
+          this.productError = false;
         })
         .catch((error) => {
-          console.log(error);
+          this.errorMessage = error.response.data.error.request.quantity;
+          this.productError = true;
+          this.productAddSending = false;
         });
-      // } else {
-      //   this.updateCartProductAmountAction({
-      //     basketItemId: this.productInfo.productId,
-      //     quantity: this.productInfo.quantity,
-      //   }).then(() => {
-      //     this.productAdded = true;
-      //     this.productAddSending = false;
-      //   });
-      // }
     },
   },
   watch: {

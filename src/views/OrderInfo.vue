@@ -106,21 +106,6 @@ export default {
       totalPrice: "cartTotalPrice",
     }),
   },
-  // watch: {
-  //   "$route.params.id": {
-  //     handler() {
-  //       console.log(this.$route.params.id + "id");
-  //       // if (this.$store.state.orderInfo && this.$store.state.orderInfo.id === this.$route.params.id) return;
-  //       this.$store
-  //         .dispatch("loadOrderInfo", this.$route.params.id)
-  //         .catch((error) => {
-  //           console.log(error.response.data.error.message);
-  //           this.$router.push({ name: "error" });
-  //         });
-  //     },
-  //     immediate: true,
-  //   },
-  // },
 };
 </script>
 
