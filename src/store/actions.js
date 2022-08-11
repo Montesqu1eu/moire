@@ -71,7 +71,12 @@ export async function updateCartProductAmountAction(
     .then((response) => {
       context.commit("updateCartProductsData", response.data.items);
     })
-    .catch(() => {
+    .catch((error) => {
+      this.$store.commit("showNotification", {
+        title: "Error",
+        message: error.message,
+        type: "error",
+      });
       context.commit("syncCartProducts");
     });
 }
@@ -91,6 +96,11 @@ export async function deleteCartProductItem(context, productId) {
       },
     })
     .catch((error) => {
+      this.$store.commit("showNotification", {
+        title: "Error",
+        message: error.message,
+        type: "error",
+      });
       context.commit("updateCartProductsData", error.data.items);
     });
 }

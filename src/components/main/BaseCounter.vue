@@ -13,9 +13,16 @@
       </svg>
     </button>
 
-    <input :value="counter" type="text" @input="onInput" />
+    <input
+      ref="counterInput"
+      :value="counter"
+      type="text"
+      @input="onInput"
+      @change="onInput"
+      @keydown.enter="this.$refs.counterInput.blur()"
+    />
 
-    <button aria-label="Добавить один товар" @click.prevent="countPlus">
+    <button aria-label="Добавить один товар" @click="countPlus">
       <svg
         fill="none"
         height="37"
@@ -65,6 +72,9 @@ export default {
       this.$emit("update", this.counter);
     },
     onInput(event) {
+      if (+event.target.value < 0 || event.target.value === "")
+        this.counter = 0;
+      this.counter = +event.target.value;
       this.$emit("update", +event.target.value);
     },
   },

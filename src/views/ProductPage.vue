@@ -14,12 +14,20 @@
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="index.html"> Каталог </a>
+          <router-link :to="{ name: 'main' }" class="breadcrumbs__link">
+            Каталог
+          </router-link>
         </li>
         <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="#">
+          <router-link
+            :to="{
+              name: 'main',
+              query: { filter: productData.category.id },
+            }"
+            class="breadcrumbs__link"
+          >
             {{ productData.category.title }}
-          </a>
+          </router-link>
         </li>
         <li class="breadcrumbs__item">
           <a class="breadcrumbs__link"> {{ productData.title }} </a>
@@ -215,6 +223,11 @@ export default {
           this.productError = false;
         })
         .catch((error) => {
+          this.$store.commit("showNotification", {
+            title: "Error",
+            message: error.message,
+            type: "error",
+          });
           this.errorMessage = error.response.data.error.request.quantity;
           this.productError = true;
           this.productAddSending = false;

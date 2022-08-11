@@ -202,6 +202,7 @@ export default {
       this.$emit("seasonIds", this.currentFilters.seasonIds);
       this.$emit("colorIds", this.currentFilters.colorIds);
       this.$emit("limit", this.currentFilters.limit);
+      this.$route.query = {};
     },
     reset() {
       this.$emit("priceFrom", 0);
@@ -220,6 +221,7 @@ export default {
         colorIds: [],
         limit: 12,
       };
+      this.$route.query = {};
     },
     async loadFilters(filter, url) {
       try {

@@ -39,3 +39,16 @@ export function resetCart(state) {
 export function updateOrderInfo(state, orderInfo) {
   state.orderInfo = orderInfo;
 }
+
+export function showNotification(state, { title, message, type }) {
+  state.notification = { title, message, type, isShow: true };
+}
+
+export function hideNotification(state) {
+  state.notification = {
+    title: "",
+    message: "",
+    type: "",
+    isShow: false,
+  };
+}

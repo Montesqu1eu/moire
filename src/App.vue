@@ -3,6 +3,7 @@
     <HeaderRegion />
     <router-view />
     <FooterRegion />
+    <BaseNotification :time="4000" />
   </div>
 </template>
 
@@ -12,10 +13,11 @@
 <script>
 import HeaderRegion from "@/components/HeaderRegion";
 import FooterRegion from "@/components/FooterRegion";
+import BaseNotification from "@/components/main/BaseNotification";
 import { mapActions, mapMutations } from "vuex";
 
 export default {
-  components: { FooterRegion, HeaderRegion },
+  components: { FooterRegion, HeaderRegion, BaseNotification },
   methods: {
     ...mapActions(["loadCart"]),
     ...mapMutations(["updateUserAccessKey"]),

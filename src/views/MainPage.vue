@@ -87,6 +87,10 @@ export default {
       this.productsLoading = true;
       this.productsLoadingFailed = false;
 
+      if (this.$route.query.filter) {
+        this.filter.categoryId = +this.$route.query.filter;
+      }
+
       clearTimeout(this.loadProductsTimer);
       this.loadProductsTimer = setTimeout(() => {
         axios
@@ -102,8 +106,17 @@ export default {
               colorIds: this.filter.colorIds,
             },
           })
-          .then((response) => (this.productsData = response.data))
-          .catch(() => (this.productsLoadingFailed = true))
+          .then((response) => {
+            this.productsData = response.data;
+          })
+          .catch((error) => {
+            this.$store.commit("showNotification", {
+              title: "Error",
+              message: error.message,
+              type: "error",
+            });
+            this.productsLoadingFailed = true;
+          })
           .then(() => (this.productsLoading = false));
       }, 0);
     },

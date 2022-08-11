@@ -205,6 +205,7 @@ export default {
           this.formData.deliveryTypeId = 1;
           this.formError = error.response.data.error.request || {};
           this.formErrorMessage = error.response.data.error.message;
+          // setTimeout(() => this.$store.commit("setError", ""), 2000);
         });
     },
     order() {
@@ -232,6 +233,11 @@ export default {
           });
         })
         .catch((error) => {
+          this.$store.commit("showNotification", {
+            title: "Error",
+            message: error.message,
+            type: "error",
+          });
           this.formError = error.response.data.error.request || {};
           this.formErrorMessage = error.response.data.error.message;
         });
@@ -250,7 +256,9 @@ export default {
     "formData.deliveryTypeId"() {
       this.paymentType();
     },
-  },
+    // eslint-disable-next-line
+  }
+  // eslint-disable-next-line
 };
 </script>
 
