@@ -157,8 +157,8 @@
 <script>
 import { mapGetters } from "vuex";
 import formatNumber from "@/mixins/formatNumber";
-import BaseFormInput from "@/components/text/BaseFormInput";
-import BaseFormTextarea from "@/components/text/BaseFormTextarea";
+import BaseFormInput from "@/components/uiKit/input/BaseFormInput";
+import BaseFormTextarea from "@/components/uiKit/input/BaseFormTextarea";
 import axios from "axios";
 import { API_BASE_URL } from "@/config";
 
