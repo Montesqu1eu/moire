@@ -75,9 +75,13 @@
               <BaseSelect :data-list="productData.sizes" @select="getSize" />
             </div>
 
-            <button class="item__button button button--primery" type="submit">
+            <BaseButton
+              class="item__button"
+              type="primary"
+              button-type="submit"
+            >
               В корзину
-            </button>
+            </BaseButton>
           </form>
         </div>
       </div>
@@ -124,6 +128,7 @@ import { mapActions } from "vuex";
 import BaseSelect from "@/components/uiKit/select/BaseSelect";
 import BaseCounter from "@/components/uiKit/form/BaseCounter";
 import BaseGallery from "@/components/uiKit/gallery/BaseGallery";
+import BaseButton from "@/components/uiKit/button/BaseButton";
 
 export default {
   name: "ProductPage",
@@ -132,6 +137,7 @@ export default {
     BaseGallery,
     BaseCounter,
     BaseSelect,
+    BaseButton,
   },
   data() {
     return {

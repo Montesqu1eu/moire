@@ -1,0 +1,57 @@
+.button {
+  margin: 0;
+  border: 0;
+  font: inherit;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-block;
+  padding: 25px 15px;
+  transition: all 0.2s ease;
+  font-family: "Circe", "Arial", sans-serif;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &--primery {
+    background-color: #e02d71;
+    border: 0;
+    color: #fff;
+    font-size: 13px;
+
+    &:not(:disabled):focus,
+    &:not(:disabled):hover {
+      background-color: #150c26;
+    }
+  }
+
+  &--second {
+    background-color: transparent;
+    border: 1px solid #222;
+    padding: 15px;
+    color: #222;
+    font-size: 14px;
+
+    &:not(:disabled):focus,
+    &:not(:disabled):hover {
+      background-color: #222;
+      color: #fff;
+    }
+  }
+
+  &--del {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    width: 20px;
+    height: 20px;
+  }
+} 
