@@ -77,4 +77,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "./base-pagination.scss";
+</style>
