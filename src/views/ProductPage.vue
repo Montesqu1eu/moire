@@ -88,7 +88,7 @@
             <a class="tabs__link tabs__link--current"> Информация о товаре </a>
           </li>
           <li class="tabs__item">
-            <a class="tabs__link" href="#"> Доставка и возврат </a>
+            <a class="tabs__link"> Доставка и возврат </a>
           </li>
         </ul>
 
@@ -222,4 +222,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "./styles/productPage/product-page.scss";
+</style>

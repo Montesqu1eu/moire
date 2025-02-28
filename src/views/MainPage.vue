@@ -122,4 +122,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "./styles/mainPage/main-page.scss";
+</style>

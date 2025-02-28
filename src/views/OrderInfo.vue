@@ -124,4 +124,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "./styles/orderInfo/order-info.scss";
+</style>
