@@ -47,7 +47,7 @@
 
 <script>
 import formatNumber from "@/mixins/formatNumber";
-import BaseCounter from "@/components/main/BaseCounter";
+import BaseCounter from "@/components/uiKit/form/BaseCounter";
 import { mapActions, mapMutations } from "vuex";
 
 export default {
@@ -93,4 +93,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "./styles/cartItem/cart-item.scss";
+</style>

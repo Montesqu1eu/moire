@@ -10,8 +10,8 @@
 @import "~@/scss/style.scss";
 </style>
 <script>
-import HeaderRegion from "@/components/HeaderRegion";
-import FooterRegion from "@/components/FooterRegion";
+import HeaderRegion from "@/components/layout/HeaderRegion";
+import FooterRegion from "@/components/layout/FooterRegion";
 import { mapActions, mapMutations } from "vuex";
 
 export default {

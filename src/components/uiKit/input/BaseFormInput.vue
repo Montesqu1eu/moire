@@ -12,7 +12,7 @@
 
 <script>
 import formFieldMixin from "@/mixins/formFieldMixin";
-import BaseFormField from "@/components/text/BaseFormField";
+import BaseFormField from "@/components/uiKit/input/BaseFormField";
 
 export default {
   name: "BaseFormInput",

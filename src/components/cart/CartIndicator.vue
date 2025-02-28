@@ -30,5 +30,3 @@ export default {
   name: "CartIndicator",
 };
 </script>
-
-<style scoped></style>
