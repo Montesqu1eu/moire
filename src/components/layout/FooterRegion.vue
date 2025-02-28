@@ -26,6 +26,7 @@
       <ul class="footer__social social">
         <li class="social__item">
           <a aria-label="Вконтакте" class="social__link" href="#">
+            1
             <svg fill="currentColor" height="11" width="20">
               <use xlink:href="#icon-vk"></use>
             </svg>
@@ -33,6 +34,7 @@
         </li>
         <li class="social__item">
           <a aria-label="Инстаграм" class="social__link" href="#">
+            2
             <svg fill="currentColor" height="17" width="17">
               <use xlink:href="#icon-insta"></use>
             </svg>
@@ -40,6 +42,7 @@
         </li>
         <li class="social__item">
           <a aria-label="Facebook" class="social__link" href="#">
+            3
             <svg fill="currentColor" height="17" width="17">
               <use xlink:href="#icon-facebook"></use>
             </svg>
@@ -47,6 +50,7 @@
         </li>
         <li class="social__item">
           <a aria-label="Twitter" class="social__link" href="#">
+            4
             <svg fill="currentColor" height="14" width="17">
               <use xlink:href="#icon-twitter"></use>
             </svg>
@@ -54,6 +58,7 @@
         </li>
         <li class="social__item">
           <a aria-label="Telegram" class="social__link" href="#">
+            5
             <svg fill="currentColor" height="17" width="19">
               <use xlink:href="#icon-telegram"></use>
             </svg>
@@ -103,4 +108,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "./styles/footerRegion/footer-region.scss";
+</style>

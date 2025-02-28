@@ -27,4 +27,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "./styles/headerRegion/header-region.scss";
+</style>
