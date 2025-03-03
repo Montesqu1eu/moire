@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "BaseFormField",
+  name: "BaseField",
   props: {
     title: {
       type: String,

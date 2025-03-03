@@ -1,0 +1,48 @@
+.base-button {
+  border: none;
+  font: inherit;
+  background-color: transparent;
+  transition: all 0.2s ease;
+  font-family: "Geometria", sans-serif;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &--primary {
+    background-color: #e02d71;
+    border: none;
+    color: #fff;
+    padding: 14px 40px;
+
+    &:hover,
+    &:focus {
+      background-color: #150c26;
+    }
+  }
+
+  &--second {
+    background-color: transparent;
+    border: 1px solid #222;
+    padding: 14px 40px;
+
+    &:hover,
+    &:focus {
+      background-color: #222;
+      color: #fff;
+    }
+  }
+
+  &--del {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+  }
+}

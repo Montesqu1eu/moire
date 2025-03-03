@@ -1,7 +1,12 @@
 <template>
-  <div class="form__counter">
-    <button aria-label="Убрать один товар" @click.prevent="countMinus">
+  <div class="base-counter">
+    <button
+      class="base-counter__button"
+      aria-label="Убрать один товар"
+      @click.prevent="countMinus"
+    >
       <svg
+        class="base-counter__icon"
         fill="none"
         height="37"
         viewBox="0 0 37 37"
@@ -13,10 +18,20 @@
       </svg>
     </button>
 
-    <input :value="counter" type="text" @input="onInput" />
+    <input
+      class="base-counter__input"
+      :value="counter"
+      type="text"
+      @input="onInput"
+    />
 
-    <button aria-label="Добавить один товар" @click.prevent="countPlus">
+    <button
+      class="base-counter__button"
+      aria-label="Добавить один товар"
+      @click.prevent="countPlus"
+    >
       <svg
+        class="base-counter__icon"
         fill="none"
         height="37"
         viewBox="0 0 37 37"
@@ -71,4 +86,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "@/components/uiKit/baseCounter/styles/baseCounter/base-counter.scss";
+</style>

@@ -1,0 +1,25 @@
+.cart-indicator {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  &__icon {
+    margin-right: 5px;
+  }
+
+  &__count {
+    position: absolute;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 4px;
+    border-radius: 50%;
+    background-color: #e02d71;
+    font-size: 13px;
+    color: #fff;
+    text-align: center;
+    line-height: 20px;
+    right: -10px;
+    top: -5px;
+  }
+}

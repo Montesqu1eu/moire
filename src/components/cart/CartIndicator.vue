@@ -2,9 +2,10 @@
   <router-link
     :to="{ name: 'cart', params: {} }"
     aria-label="Корзина с товарами"
-    class="header__cart"
+    class="cart-indicator"
   >
     <svg
+      class="cart-indicator__icon"
       fill="none"
       height="24"
       viewBox="0 0 19 24"
@@ -19,7 +20,7 @@
       />
     </svg>
 
-    <span aria-label="Количество товаров" class="header__count">{{
+    <span aria-label="Количество товаров" class="cart-indicator__count">{{
       $store.state.cartProducts.length
     }}</span>
   </router-link>
@@ -30,3 +31,7 @@ export default {
   name: "CartIndicator",
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/components/cart/styles/cartIndicator/cart-indicator.scss";
+</style>

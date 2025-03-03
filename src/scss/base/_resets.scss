@@ -1,11 +1,13 @@
 html {
   -webkit-box-sizing: border-box;
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
-*, ::after, ::before {
+*,
+::after,
+::before {
   -webkit-box-sizing: inherit;
-  box-sizing: inherit
+  box-sizing: inherit;
 }
 
 body {
@@ -26,16 +28,16 @@ body {
   color: #222;
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale
+  -moz-osx-font-smoothing: grayscale;
 }
 
 img {
   max-width: 100%;
   height: auto;
   -o-object-fit: contain;
-  object-fit: contain
+  object-fit: contain;
 }
 
 a {
-  text-decoration: none
+  text-decoration: none;
 }

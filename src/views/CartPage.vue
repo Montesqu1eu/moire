@@ -38,12 +38,14 @@
             Итого: <span>{{ formatNumber(total) }} ₽</span>
           </p>
 
-          <router-link
-            :to="{ name: 'order' }"
-            class="cart__button button button--primery"
-            type="submit"
-          >
-            Оформить заказ
+          <router-link :to="{ name: 'order' }">
+            <BaseButton
+              class="cart__button"
+              type="primary"
+              button-type="submit"
+            >
+              Оформить заказ
+            </BaseButton>
           </router-link>
         </div>
       </form>
@@ -55,11 +57,13 @@
 import CartItem from "@/components/cart/CartItem";
 import { mapGetters } from "vuex";
 import formatNumber from "@/mixins/formatNumber";
+import BaseButton from "@/components/uiKit/baseButton/BaseButton";
 
 export default {
   name: "CartPage",
   components: {
     CartItem,
+    BaseButton,
   },
   mixins: [formatNumber],
   computed: {
@@ -71,4 +75,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "./styles/cartPage/cart-page.scss";
+</style>

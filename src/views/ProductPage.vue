@@ -75,9 +75,13 @@
               <BaseSelect :data-list="productData.sizes" @select="getSize" />
             </div>
 
-            <button class="item__button button button--primery" type="submit">
+            <BaseButton
+              class="item__button"
+              type="primary"
+              button-type="submit"
+            >
               В корзину
-            </button>
+            </BaseButton>
           </form>
         </div>
       </div>
@@ -88,7 +92,7 @@
             <a class="tabs__link tabs__link--current"> Информация о товаре </a>
           </li>
           <li class="tabs__item">
-            <a class="tabs__link" href="#"> Доставка и возврат </a>
+            <a class="tabs__link"> Доставка и возврат </a>
           </li>
         </ul>
 
@@ -121,9 +125,10 @@ import { API_BASE_URL } from "@/config";
 import formatNumber from "@/mixins/formatNumber";
 import { mapActions } from "vuex";
 
-import BaseSelect from "@/components/uiKit/select/BaseSelect";
-import BaseCounter from "@/components/uiKit/form/BaseCounter";
-import BaseGallery from "@/components/uiKit/gallery/BaseGallery";
+import BaseSelect from "@/components/uiKit/baseSelect/BaseSelect";
+import BaseCounter from "@/components/uiKit/baseCounter/BaseCounter";
+import BaseGallery from "@/components/uiKit/baseGallery/BaseGallery";
+import BaseButton from "@/components/uiKit/baseButton/BaseButton";
 
 export default {
   name: "ProductPage",
@@ -132,6 +137,7 @@ export default {
     BaseGallery,
     BaseCounter,
     BaseSelect,
+    BaseButton,
   },
   data() {
     return {
@@ -222,4 +228,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "./styles/productPage/product-page.scss";
+</style>
