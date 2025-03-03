@@ -138,10 +138,9 @@
               <b>{{ formatNumber(totalPrice) }} ₽</b>
             </p>
           </div>
-
-          <button class="cart__button button button--primery" type="submit">
+          <BaseButton class="cart__button" type="primary" button-type="submit">
             Оформить заказ
-          </button>
+          </BaseButton>
         </div>
         <div v-if="formErrorMessage" class="cart__error form__error-block">
           <h4>Заявка не отправлена!</h4>
@@ -159,12 +158,13 @@ import { mapGetters } from "vuex";
 import formatNumber from "@/mixins/formatNumber";
 import BaseFormInput from "@/components/uiKit/input/BaseFormInput";
 import BaseFormTextarea from "@/components/uiKit/input/BaseFormTextarea";
+import BaseButton from "@/components/uiKit/button/BaseButton";
 import axios from "axios";
 import { API_BASE_URL } from "@/config";
 
 export default {
   name: "OrderPage",
-  components: { BaseFormInput, BaseFormTextarea },
+  components: { BaseFormInput, BaseFormTextarea, BaseButton },
   mixins: [formatNumber],
   data() {
     return {

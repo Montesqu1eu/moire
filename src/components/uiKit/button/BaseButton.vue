@@ -1,43 +1,41 @@
 <template>
   <button
-    :class="[
-      'button',
-      {
-        'button--primery': type === 'primary',
-        'button--second': type === 'secondary',
-        'button--del': type === 'delete',
-      },
-    ]"
+    :class="buttonClasses"
     :disabled="disabled"
     :type="buttonType"
+    class="button"
     @click="$emit('click', $event)"
   >
     <slot />
   </button>
 </template>
 
-<script>
-export default {
-  name: "BaseButton",
-  props: {
-    type: {
-      type: String,
-      default: "primary",
-      validator: (value) => ["primary", "secondary", "delete"].includes(value),
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    buttonType: {
-      type: String,
-      default: "button",
-      validator: (value) => ["button", "submit", "reset"].includes(value),
-    },
+<script setup>
+import { computed, defineProps, defineEmits } from "vue";
+import { BUTTON_TYPES, HTML_BUTTON_TYPES, BUTTON_MODIFIERS } from "./constants";
+
+const props = defineProps({
+  type: {
+    type: String,
+    default: BUTTON_TYPES.PRIMARY,
+    validator: (value) => Object.values(BUTTON_TYPES).includes(value),
   },
-};
+  buttonType: {
+    type: String,
+    default: HTML_BUTTON_TYPES.BUTTON,
+    validator: (value) => Object.values(HTML_BUTTON_TYPES).includes(value),
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+defineEmits(["click"]);
+
+const buttonClasses = computed(() => BUTTON_MODIFIERS[props.type]);
 </script>
 
 <style lang="scss" scoped>
-@import "./styles/baseButton/base-button.scss";
+@import "./base-button.scss";
 </style>

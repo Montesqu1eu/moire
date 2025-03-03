@@ -143,19 +143,12 @@
           </li>
         </ul>
       </fieldset>
-
-      <button
-        class="filter__submit button button--primery"
-        @click.prevent="submit"
-      >
+      <BaseButton class="filter__submit" type="primary" @click.prevent="submit">
         Применить
-      </button>
-      <button
-        class="filter__reset button button--second"
-        @click.prevent="reset"
-      >
+      </BaseButton>
+      <BaseButton class="filter__reset" type="secondary" @click.prevent="reset">
         Сбросить
-      </button>
+      </BaseButton>
     </form>
   </aside>
 </template>
@@ -163,11 +156,15 @@
 <script>
 import axios from "axios";
 import { API_BASE_URL } from "@/config";
+import BaseButton from "@/components/uiKit/button/BaseButton";
 
 // const productLimit = [12, 24, 32];
 
 export default {
   name: "ProductFilters",
+  components: {
+    BaseButton,
+  },
   data() {
     return {
       filters: {
