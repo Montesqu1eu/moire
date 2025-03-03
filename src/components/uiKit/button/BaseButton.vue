@@ -4,6 +4,7 @@
     :disabled="disabled"
     :type="buttonType"
     class="button"
+    :aria-label="ariaLabel"
     @click="$emit('click', $event)"
   >
     <slot />
@@ -28,6 +29,10 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  ariaLabel: {
+    type: String,
+    default: "",
   },
 });
 

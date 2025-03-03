@@ -1,7 +1,8 @@
 <template>
-  <ul class="catalog__pagination pagination">
+  <ul class="pagination">
     <li class="pagination__item">
-      <button
+      <BaseButton
+        type="secondary"
         :class="{ 'pagination__link--disabled': page == 1 }"
         :disabled="page === 1"
         aria-label="Предыдущая страница"
@@ -20,7 +21,7 @@
             stroke="#222222"
           />
         </svg>
-      </button>
+      </BaseButton>
     </li>
     <li v-for="pageNumber in pages" :key="pageNumber" class="pagination__item">
       <a
@@ -32,12 +33,12 @@
       </a>
     </li>
     <li class="pagination__item">
-      <button
+      <BaseButton
+        type="secondary"
         :class="{ 'pagination__link--disabled': page == pages }"
         :disabled="page === pages"
         aria-label="Следующая страница"
         class="pagination__link pagination__link--arrow"
-        href="#"
         @click="paginate(page + 1)"
       >
         <svg
@@ -49,14 +50,19 @@
         >
           <path d="M1.25 11.0343L6.25 6.0343L1.25 1.0343" stroke="#222222" />
         </svg>
-      </button>
+      </BaseButton>
     </li>
   </ul>
 </template>
 
 <script>
+import BaseButton from "@/components/uiKit/button/BaseButton";
+
 export default {
   name: "BasePagination",
+  components: {
+    BaseButton,
+  },
   props: ["pageNum", "count", "perPage"],
   data() {
     return {
