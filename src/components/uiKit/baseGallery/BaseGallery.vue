@@ -1,15 +1,19 @@
 <template>
-  <div class="pics">
-    <div class="pics__wrapper">
+  <div class="base-gallery">
+    <div class="base-gallery__wrapper">
       <img :src="mainImg" alt="Название товара" height="570" width="570" />
     </div>
-    <ul class="pics__list">
-      <li v-for="(item, index) in imgList" :key="index" class="pics__item">
+    <ul class="base-gallery__list">
+      <li
+        v-for="(item, index) in imgList"
+        :key="index"
+        class="base-gallery__item"
+      >
         <a
           :class="{
-            'pics__link--current': item.gallery[0].file.url == mainImg,
+            'base-gallery__link--current': item.gallery[0].file.url == mainImg,
           }"
-          class="pics__link"
+          class="base-gallery__link"
           @click.prevent="changeImg($event)"
         >
           <img
