@@ -1,49 +1,49 @@
 <template>
-  <aside class="filter">
-    <form action="#" class="filter__form form" method="get">
-      <fieldset class="form__block">
-        <legend class="form__legend">Цена</legend>
-        <label class="form__label form__label--price">
+  <aside class="product-filters">
+    <form class="product-filters__form" method="get" @submit.prevent>
+      <fieldset class="product-filters__block">
+        <legend class="product-filters__legend">Цена</legend>
+        <label class="product-filters__label product-filters__label--price">
           <input
             v-model.number="currentFilters.priceFrom"
-            class="form__input"
+            class="product-filters__input"
             name="min-price"
             type="text"
           />
-          <span class="form__value">От</span>
+          <span class="product-filters__value">От</span>
         </label>
-        <label class="form__label form__label--price">
+        <label class="product-filters__label product-filters__label--price">
           <input
             v-model.number="currentFilters.priceTo"
-            class="form__input"
+            class="product-filters__input"
             name="max-price"
             type="text"
           />
-          <span class="form__value">До</span>
+          <span class="product-filters__value">До</span>
         </label>
       </fieldset>
 
-      <fieldset class="form__block">
-        <legend class="form__legend">Цвет</legend>
-        <ul class="colors colors--black">
+      <fieldset class="product-filters__block">
+        <legend class="product-filters__legend">Цвет</legend>
+        <ul class="product-filters__colors">
           <li
             v-for="(color, index) in colorsData"
             :key="index"
-            class="colors__item"
+            class="product-filters__colors-item"
           >
-            <label class="colors__label">
+            <label class="product-filters__colors-label">
               <input
                 v-model="currentFilters.colorIds"
                 :name="color.id"
                 :value="color.id"
-                class="colors__radio sr-only"
+                class="product-filters__colors-input sr-only"
                 type="checkbox"
               />
               <span
                 :style="{
                   'background-color': color.code,
                 }"
-                class="colors__value"
+                class="product-filters__colors-value"
               >
               </span>
             </label>
@@ -51,12 +51,12 @@
         </ul>
       </fieldset>
 
-      <fieldset class="form__block">
-        <legend class="form__legend">Категория</legend>
-        <label class="form__label form__label--select">
+      <fieldset class="product-filters__block">
+        <legend class="product-filters__legend">Категория</legend>
+        <label class="product-filters__label product-filters__label--select">
           <select
             v-model.number="currentFilters.categoryId"
-            class="form__select"
+            class="product-filters__select"
             name="category"
           >
             <option value="0">Все категории</option>
@@ -71,23 +71,23 @@
         </label>
       </fieldset>
 
-      <fieldset class="form__block">
-        <legend class="form__legend">Материал</legend>
-        <ul class="check-list">
+      <fieldset class="product-filters__block">
+        <legend class="product-filters__legend">Материал</legend>
+        <ul class="product-filters__check-list">
           <li
             v-for="(material, index) in materialsData"
             :key="index"
-            class="check-list__item"
+            class="product-filters__check-item"
           >
-            <label class="check-list__label">
+            <label class="product-filters__check-label">
               <input
                 v-model.number="currentFilters.materialIds"
                 :value="material.id"
-                class="check-list__check sr-only"
+                class="product-filters__check-input sr-only"
                 name="material"
                 type="checkbox"
               />
-              <span class="check-list__desc">
+              <span class="product-filters__check-desc">
                 {{ material.title }}
                 <span>({{ material.productsCount }})</span>
               </span>
@@ -96,23 +96,23 @@
         </ul>
       </fieldset>
 
-      <fieldset class="form__block">
-        <legend class="form__legend">Коллекция</legend>
-        <ul class="check-list">
+      <fieldset class="product-filters__block">
+        <legend class="product-filters__legend">Коллекция</legend>
+        <ul class="product-filters__check-list">
           <li
             v-for="(season, index) in seasonsData"
             :key="index"
-            class="check-list__item"
+            class="product-filters__check-item"
           >
-            <label class="check-list__label">
+            <label class="product-filters__check-label">
               <input
                 v-model.number="currentFilters.seasonIds"
                 :value="season.id"
-                class="check-list__check sr-only"
+                class="product-filters__check-input sr-only"
                 name="season"
                 type="checkbox"
               />
-              <span class="check-list__desc">
+              <span class="product-filters__check-desc">
                 {{ season.title }}
                 <span>({{ season.productsCount }})</span>
               </span>
@@ -121,32 +121,33 @@
         </ul>
       </fieldset>
 
-      <fieldset class="form__block">
-        <legend class="form__legend">Кол-во товаров</legend>
-        <ul class="check-list">
+      <fieldset class="product-filters__block">
+        <legend class="product-filters__legend">Кол-во товаров</legend>
+        <ul class="product-filters__check-list">
           <li
             v-for="(item, index) in productLimit"
             :key="index"
-            class="check-list__item"
+            class="product-filters__check-item"
           >
-            <label class="check-list__label">
+            <label class="product-filters__check-label">
               <input
                 v-model="currentFilters.limit"
                 :checked="index === 0"
                 :name="item"
                 :value="item"
-                class="check-list__check sr-only"
+                class="product-filters__check-input sr-only"
                 type="radio"
               />
-              <span class="check-list__desc"> {{ item }} </span>
+              <span class="product-filters__check-desc">{{ item }}</span>
             </label>
           </li>
         </ul>
       </fieldset>
-      <BaseButton class="filter__submit" type="primary" @click.prevent="submit">
+
+      <BaseButton class="product-filters__submit" type="primary" @click="submit">
         Применить
       </BaseButton>
-      <BaseButton class="filter__reset" type="secondary" @click.prevent="reset">
+      <BaseButton class="product-filters__reset" type="secondary" @click="reset">
         Сбросить
       </BaseButton>
     </form>
@@ -236,4 +237,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "@/components/product/styles/productFilters/product-filters.scss";
+</style>

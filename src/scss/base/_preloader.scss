@@ -1,12 +1,11 @@
-.preloader{
-  &-catalog{
+.preloader {
+  &-catalog {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
   }
 }
-
 
 .lds-ellipsis {
   display: inline-block;

@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "baseCounterField",
+  name: "BaseField",
   props: {
     title: {
       type: String,

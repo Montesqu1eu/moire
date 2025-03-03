@@ -1,5 +1,5 @@
 <template>
-  <BaseFormField :error="error" :title="title">
+  <BaseField :error="error" :title="title">
     <input
       :value="modelValue"
       :placeholder="placeholder"
@@ -7,17 +7,17 @@
       @input="updateValue"
       class="form__input"
     />
-  </BaseFormField>
+  </BaseField>
 </template>
 
 <script>
 import formFieldMixin from "@/mixins/formFieldMixin";
-import BaseFormField from "@/components/uiKit/baseInput/BaseFormField";
+import BaseField from "@/components/uiKit/baseInput/BaseField";
 
 export default {
   name: "BaseFormInput",
   components: {
-    BaseFormField,
+    BaseField,
   },
   props: {
     type: {

@@ -31,35 +31,35 @@
       >
         <div class="cart__field">
           <div class="cart__data">
-            <baseCounterInput
+            <BaseFormInput
               v-model="formData.name"
               :error="formError.name"
               placeholder="Введите ваше полное имя"
               title="ФИО"
             />
 
-            <baseCounterInput
+            <BaseFormInput
               v-model="formData.address"
               :error="formError.address"
               placeholder="Введите ваш адрес"
               title="Адрес доставки"
             />
 
-            <baseCounterInput
+            <BaseFormInput
               v-model="formData.phone"
               :error="formError.phone"
               placeholder="Введите ваш телефон"
               title="Телефон"
             />
 
-            <baseCounterInput
+            <BaseFormInput
               v-model="formData.email"
               :error="formError.email"
               placeholder="Введите ваш email"
               title="Email"
             />
 
-            <baseCounterTextarea
+            <BaseFormTextarea
               v-model="formData.comment"
               :error="formError.comment"
               placeholder="Ваши пожелания"
@@ -156,15 +156,15 @@
 <script>
 import { mapGetters } from "vuex";
 import formatNumber from "@/mixins/formatNumber";
-import baseCounterInput from "@/components/uiKit/baseInput/BaseFormInput";
-import baseCounterTextarea from "@/components/uiKit/baseInput/BaseFormTextarea";
+import BaseFormInput from "@/components/uiKit/baseInput/BaseFormInput";
+import BaseFormTextarea from "@/components/uiKit/baseInput/BaseFormTextarea";
 import BaseButton from "@/components/uiKit/baseButton/BaseButton";
 import axios from "axios";
 import { API_BASE_URL } from "@/config";
 
 export default {
   name: "OrderPage",
-  components: { baseCounterInput, baseCounterTextarea, BaseButton },
+  components: { BaseFormInput, BaseFormTextarea, BaseButton },
   mixins: [formatNumber],
   data() {
     return {
