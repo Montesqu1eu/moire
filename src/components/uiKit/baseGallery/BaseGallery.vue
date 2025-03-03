@@ -1,5 +1,5 @@
 <template>
-  <div class="item__pics pics">
+  <div class="pics">
     <div class="pics__wrapper">
       <img :src="mainImg" alt="Название товара" height="570" width="570" />
     </div>
@@ -53,4 +53,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "@/components/uiKit/baseGallery/styles/baseGallery/base-gallery.scss";
+</style>

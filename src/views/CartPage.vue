@@ -57,7 +57,7 @@
 import CartItem from "@/components/cart/CartItem";
 import { mapGetters } from "vuex";
 import formatNumber from "@/mixins/formatNumber";
-import BaseButton from "@/components/uiKit/button/BaseButton";
+import BaseButton from "@/components/uiKit/baseButton/BaseButton";
 
 export default {
   name: "CartPage",

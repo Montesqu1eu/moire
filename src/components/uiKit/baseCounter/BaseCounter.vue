@@ -87,5 +87,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/components/uiKit/form/styles/baseCounter/base-counter.scss";
+@import "@/components/uiKit/baseCounter/styles/baseCounter/base-counter.scss";
 </style>

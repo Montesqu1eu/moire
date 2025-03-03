@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import BaseButton from "@/components/uiKit/button/BaseButton";
+import BaseButton from "@/components/uiKit/baseButton/BaseButton";
 
 export default {
   name: "BasePagination",
@@ -84,5 +84,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./base-pagination.scss";
+@import "./styles/basePagination/base-pagination.scss";
 </style>

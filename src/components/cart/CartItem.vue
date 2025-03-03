@@ -47,7 +47,7 @@
 
 <script>
 import formatNumber from "@/mixins/formatNumber";
-import BaseCounter from "@/components/uiKit/form/BaseCounter";
+import BaseCounter from "@/components/uiKit/baseCounter/BaseCounter";
 import { mapActions, mapMutations } from "vuex";
 
 export default {

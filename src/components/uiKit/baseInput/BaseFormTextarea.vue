@@ -1,19 +1,19 @@
 <template>
-  <BaseFormField :error="error" :title="title">
+  <baseCounterField :error="error" :title="title">
     <textarea
       :value="modelValue"
       :placeholder="placeholder"
       @input="updateValue"
       class="form__input form__input--area"
     ></textarea>
-  </BaseFormField>
+  </baseCounterField>
 </template>
 
 <script>
 import formFieldMixin from "@/mixins/formFieldMixin";
 
 export default {
-  name: "BaseFormTextarea",
+  name: "baseCounterTextarea",
   mixins: [formFieldMixin],
 };
 </script>

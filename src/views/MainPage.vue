@@ -47,7 +47,7 @@ import ProductList from "@/components/product/ProductList";
 import axios from "axios";
 import { API_BASE_URL } from "@/config";
 import ProductFilters from "@/components/product/ProductFilters";
-import BasePagination from "@/components/uiKit/pagination/BasePagination";
+import BasePagination from "@/components/uiKit/basePagination/BasePagination";
 import filtersChanges from "@/mixins/filtersChanges";
 
 export default {

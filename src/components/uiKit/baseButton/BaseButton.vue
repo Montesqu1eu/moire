@@ -3,7 +3,7 @@
     :class="buttonClasses"
     :disabled="disabled"
     :type="buttonType"
-    class="button"
+    class="base-button"
     :aria-label="ariaLabel"
     @click="$emit('click', $event)"
   >
@@ -42,5 +42,5 @@ const buttonClasses = computed(() => BUTTON_MODIFIERS[props.type]);
 </script>
 
 <style lang="scss" scoped>
-@import "./base-button.scss";
+@import "./styles/baseButton/base-button.scss";
 </style>

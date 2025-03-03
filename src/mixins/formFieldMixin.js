@@ -1,4 +1,4 @@
-import BaseFormField from "@/components/uiKit/input/BaseFormField";
+import BaseFormField from "@/components/uiKit/baseInput/BaseFormField";
 
 export default {
   components: { BaseFormField },

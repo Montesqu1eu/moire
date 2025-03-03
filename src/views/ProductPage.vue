@@ -125,10 +125,10 @@ import { API_BASE_URL } from "@/config";
 import formatNumber from "@/mixins/formatNumber";
 import { mapActions } from "vuex";
 
-import BaseSelect from "@/components/uiKit/select/BaseSelect";
-import BaseCounter from "@/components/uiKit/form/BaseCounter";
-import BaseGallery from "@/components/uiKit/gallery/BaseGallery";
-import BaseButton from "@/components/uiKit/button/BaseButton";
+import BaseSelect from "@/components/uiKit/baseSelect/BaseSelect";
+import BaseCounter from "@/components/uiKit/baseCounter/BaseCounter";
+import BaseGallery from "@/components/uiKit/baseGallery/BaseGallery";
+import BaseButton from "@/components/uiKit/baseButton/BaseButton";
 
 export default {
   name: "ProductPage",

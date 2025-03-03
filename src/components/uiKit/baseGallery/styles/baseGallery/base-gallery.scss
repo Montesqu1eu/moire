@@ -1,0 +1,28 @@
+.pics { 
+  &__wrapper {
+    margin-bottom: 20px;
+  }
+  
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+  }
+  
+  &__link {
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    
+    &:focus,
+    &:hover {
+      border-color: #e02d71;
+    }
+    
+    &--current {
+      border-color: #e02d71;
+    }
+  }
+}

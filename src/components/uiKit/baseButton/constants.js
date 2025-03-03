@@ -11,7 +11,7 @@ export const HTML_BUTTON_TYPES = {
 };
 
 export const BUTTON_MODIFIERS = {
-  [BUTTON_TYPES.PRIMARY]: "button--primery",
-  [BUTTON_TYPES.SECONDARY]: "button--second",
-  [BUTTON_TYPES.DELETE]: "button--del",
+  [BUTTON_TYPES.PRIMARY]: "base-button--primary",
+  [BUTTON_TYPES.SECONDARY]: "base-button--second",
+  [BUTTON_TYPES.DELETE]: "base-button--del",
 };

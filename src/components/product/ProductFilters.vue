@@ -156,7 +156,7 @@
 <script>
 import axios from "axios";
 import { API_BASE_URL } from "@/config";
-import BaseButton from "@/components/uiKit/button/BaseButton";
+import BaseButton from "@/components/uiKit/baseButton/BaseButton";
 
 // const productLimit = [12, 24, 32];
 
